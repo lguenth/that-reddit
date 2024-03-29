@@ -1,0 +1,1 @@
+find that-reddit/submissions/tifu/ -name '*.txt' -exec sh -c 'curl -F data="@{}" -F model="english-gum-ud-2.12-230717" -F tokenizer= -F tagger= -F parser= http://lindat.mff.cuni.cz/services/udpipe/api/process | PYTHONIOENCODING=utf-8 python -c "import sys,json; print(json.load(sys.stdin)[\"result\"])" > "that-reddit/automatic-annotation/tifu/$(basename {} .txt).conllu"' \;
